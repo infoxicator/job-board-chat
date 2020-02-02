@@ -1,24 +1,18 @@
 import React from 'react';
 import { Route } from '@americanexpress/one-app-router';
-import csp from '../csp';
+import { ApolloProvider } from '@apollo/react-hooks';
+import client from '../graphql/client';
 import Chat from './Chat';
 
 const JobBoardChat = () => (
-  <div>
+  <ApolloProvider client={client}>
     <Chat user="Ruben" />
-  </div>
+  </ApolloProvider>
 );
 
 // Read about childRoutes: https://github.com/americanexpress/one-app#routing
 JobBoardChat.childRoutes = () => ([
   <Route path="/" />,
 ]);
-
-// Read about appConfig: https://github.com/americanexpress/one-app#appconfig
-if (!global.BROWSER) {
-  JobBoardChat.appConfig = {
-    csp,
-  };
-}
 
 export default JobBoardChat;
